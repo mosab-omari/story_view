@@ -18,6 +18,8 @@ enum IndicatorHeight { small, large }
 
 /// This is a representation of a story item (or page).
 class StoryItem {
+  final int? index;
+
   /// Specifies how long the page should be displayed. It should be a reasonable
   /// amount of time greater than 0 milliseconds.
   final Duration duration;
@@ -34,8 +36,10 @@ class StoryItem {
 
   /// The page content
   final Widget view;
+
   StoryItem(
     this.view, {
+    this.index,
     required this.duration,
     this.shown = false,
   });
@@ -218,6 +222,7 @@ class StoryItem {
   /// one passed to the `StoryView`
   factory StoryItem.pageVideo(
     String url, {
+    int? index,
     required StoryController controller,
     Key? key,
     Duration? duration,
@@ -260,6 +265,7 @@ class StoryItem {
           ),
         ),
         shown: shown,
+        index: index,
         duration: duration ?? Duration(seconds: 10));
   }
 
@@ -406,6 +412,7 @@ class StoryView extends StatefulWidget {
 
   // Indicator Color
   final Color? indicatorColor;
+
   // Indicator Foreground Color
   final Color? indicatorForegroundColor;
 
@@ -826,11 +833,11 @@ class StoryProgressIndicator extends StatelessWidget {
         this.indicatorHeight,
       ),
       foregroundPainter: IndicatorOval(
-        this.indicatorForegroundColor?? Colors.white.withOpacity(0.8),
+        this.indicatorForegroundColor ?? Colors.white.withOpacity(0.8),
         this.value,
       ),
       painter: IndicatorOval(
-        this.indicatorColor?? Colors.white.withOpacity(0.4),
+        this.indicatorColor ?? Colors.white.withOpacity(0.4),
         1.0,
       ),
     );
