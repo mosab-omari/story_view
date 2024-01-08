@@ -112,6 +112,7 @@ class StoryItem {
     required String url,
     required StoryController controller,
     Key? key,
+    int? index,
     BoxFit imageFit = BoxFit.fitWidth,
     String? caption,
     bool shown = false,
@@ -160,6 +161,7 @@ class StoryItem {
         ),
       ),
       shown: shown,
+      index: index,
       duration: duration ?? Duration(seconds: 3),
     );
   }
